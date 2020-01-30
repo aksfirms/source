@@ -16,5 +16,6 @@ export class HomeComponent implements OnInit {
     this.apiService.get().subscribe((data: any) => {
          this.data = data;
     })
+    this.apiService.addNewUser();
   }
 }
