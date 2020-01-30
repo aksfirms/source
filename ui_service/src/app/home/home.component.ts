@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../api.service';
+import { RegistrationService } from '../_services/registration.service';
 
 
 @Component({
@@ -10,12 +11,28 @@ import { ApiService } from '../api.service';
 
 export class HomeComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
-  data = {};
+  authError: any;
+
+  error: string;
+
+  constructor(private apiService: ApiService,
+    private regService: RegistrationService,
+    private cdr: ChangeDetectorRef) { }
+
   ngOnInit() {
-    this.apiService.get().subscribe((data: any) => {
-         this.data = data;
-    })
-    this.apiService.addNewUser();
+    this.regService.eventAuthError$.subscribe( data => {
+      this.authError = data;
+      if (this.authError.message) {
+        this.error = this.authError.message;
+      }
+      this.cdr.detectChanges();
+    });
+    this.regService.addNewUser({
+      'firstName': 'Ashish',
+      'lastName': 'Sinha',
+      'password': 'passWorygs',
+      'email': 'abclknkln@ex.com'
+    });
   }
+
 }
