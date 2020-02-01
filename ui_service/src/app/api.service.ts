@@ -16,14 +16,4 @@ export class ApiService {
   public get() {
     return this.httpClient.get(this.SERVER_URL);
   }
-
-  public addNewUser(){
-    this.fAuth.auth.createUserWithEmailAndPassword('mymaal@ex.com','example')
-    .then(userCredential =>{
-      console.log(userCredential.user.getIdToken());
-    })
-    .catch(error =>{
-      console.log(error);
-    })
-  }
 }
