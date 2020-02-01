@@ -1,0 +1,6 @@
+.user-logo{
+    border: 2px solid cadetblue;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 3px 3px 5px 1px #888888;
+}

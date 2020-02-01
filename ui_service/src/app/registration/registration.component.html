@@ -1,0 +1,32 @@
+<form [formGroup]="registerForm" class="container card col-md-4 col-sm-12 col-xs-12 p-4" (ngSubmit)=onSubmit()>
+
+ <app-user-logo></app-user-logo>
+
+  <mat-form-field>
+    <input matInput placeholder="First Name" formControlName="firstName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Last Name" formControlName="lastName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email">
+    <mat-error *ngIf="registerForm?.controls?.email?.errors?.required">
+      Email is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="!registerForm?.controls?.email?.errors?.required && registerForm?.controls?.email?.errors">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
